@@ -32,11 +32,20 @@ Task:
 - Implement an optimized hashmap-based solution.
 - Analyze the time and space complexity of both.
 
-Hint:
-- Think about the remainders. If (a + b) % 60 == 0, what does that
-  tell you about (a % 60) and (b % 60)?
+seen = {}
+1) initialize hashmap
+2) go through time array
+3) at each time, get the remainder (time[i] % 60) = r
+4) find complement
+5) check if complement in hashmap
+6) increment count variable
+6.5) increment freq
+7) return count
+
+
 '''
 from typing import List
+from collections import defaultdict
 
 class Solution:
     """
@@ -44,10 +53,75 @@ class Solution:
     """
 
     def numPairsDivisibleBy60_brute_force(self, time: List[int]) -> int:
-        pass
+        count = 0 
+        
+        for i in range(len(time)):
+            for j in range(i + 1, len(time)):
+                if (time[i] + time[j]) % 60 == 0:
+                    count += 1
+        
+        return count
 
     def numPairsDivisibleBy60_hashmap(self, time: List[int]) -> int:
-        pass
+        hash = {}
+
+        '''
+        Example: [60, 60, 60]
+        {}
+        
+        Iter 1: 
+        (60 - 60) % 60 = 0 % 60 = 0
+
+        time = [40, 40, 20]
+        hashmap = { 40: 2}
+        complement = (60 - 20) % 60 = 40 o(1)
+        count += 2
+
+        remainder = time[i] % 60
+        complement = (60 - remainder) % 60
+
+        rem = 60 % 60 = 0
+        com = 60 - 0 = 60 vs (60 - 0) % 60 = 0
+
+        {60}
+        
+        '''
+        count = 0
+        for i in range(len(time)):
+            remainder = time[i] % 60
+            complement = (60 - remainder) % 60
+            # remainder = time[i] % 60         <- doesnt account for 0 remainder
+            # Check if complement exists
+            if complement in hash:
+                count += hash[complement]     # add current complement count
+
+            hash[remainder] = hash.get(remainder, 0) + 1            # add current element's remainder to the hashmap
+            
+        return count
+        
+        '''
+        t.c = o(n)
+        s.c = o(60) -> o(1)
+
+        t = [40, 40, 20]
+        hash = {40 : 2, 20: 1}
+        r=20
+        c=40
+        
+
+        '''
+        '''
+        count = 0
+        seen = {}
+        for t in time:
+            r = t % 60
+            complement = (60 - r) % 60
+            if complement in seen:
+                count += seen[complement]
+            seen[r] = seen.get(r, 0) + 1
+        return count
+        
+        '''
 
 if __name__ == "__main__":
     solver = Solution()
@@ -83,3 +157,16 @@ if __name__ == "__main__":
         print(f'  Input:    time = {time}')
         print(f"  Output:   {result}")
         print(f"  Expected: {expected}\n")
+
+'''
+ thiss is the weird solution 
+
+ def weird(self,time:Linst[int]) -> int:
+    hashm= defaultdict(int)
+    count = 0
+    for i in time:
+        count+=hashm[-i%60]
+        hashm[i%60]+=1
+    return count ;(
+ 
+'''
