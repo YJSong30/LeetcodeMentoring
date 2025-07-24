@@ -34,7 +34,7 @@ Task:
 
 Hint:
 - Think about prefix sums. If the sum from index i to j equals k,
-  what can you say about prefixSum[j] - prefixSum[i-1]?
+what can you say about prefixSum[j] - prefixSum[i-1]?
 '''
 from typing import List
 
@@ -44,17 +44,10 @@ class Solution:
     """
 
     def subarraySum_brute_force(self, nums: List[int], k: int) -> int:
-        count = 0
-        for i in range(len(nums)):
-            current_sum = 0
-            for j in range(i, len(nums)):
-                current_sum += nums[j]
-                if current_sum == k:
-                    count += 1
-        return count
+        pass
 
-    # def subarraySum_hashmap(self, nums: List[int], k: int) -> int:
-    #     pass
+    def subarraySum_hashmap(self, nums: List[int], k: int) -> int:
+        pass
 
 if __name__ == "__main__":
     solver = Solution()
@@ -81,14 +74,14 @@ if __name__ == "__main__":
         print(f"  Output:   {result}")
         print(f"  Expected: {expected}\n")
 
-    # print("--- Testing Hashmap Solution ---")
-    # print()
-    # for i, case in enumerate(test_cases):
-    #     nums, k, expected = case["nums"], case["k"], case["expected"]
-    #     result = solver.subarraySum_hashmap(nums, k)
-    #     status = "✅ Pass" if result == expected else "❌ Fail"
+    print("--- Testing Hashmap Solution ---")
+    print()
+    for i, case in enumerate(test_cases):
+        nums, k, expected = case["nums"], case["k"], case["expected"]
+        result = solver.subarraySum_hashmap(nums, k)
+        status = "✅ Pass" if result == expected else "❌ Fail"
 
-    #     print(f"Test Case {i+1}: {status}")
-    #     print(f'  Input:    nums = {nums}, k = {k}')
-    #     print(f"  Output:   {result}")
-    #     print(f"  Expected: {expected}\n")
+        print(f"Test Case {i+1}: {status}")
+        print(f'  Input:    nums = {nums}, k = {k}')
+        print(f"  Output:   {result}")
+        print(f"  Expected: {expected}\n")
