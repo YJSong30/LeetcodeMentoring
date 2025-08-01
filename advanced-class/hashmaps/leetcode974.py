@@ -27,11 +27,56 @@ Task:
 - Implement a hashmap-based solution using prefix sum and modulo.
 - Analyze the time and space complexity of both.
 
-Hint:
-- For the hashmap solution, use the fact that if two prefix sums have the same
-  remainder when divided by k, their difference is divisible by k.
-- Handle negative remainders by adding k to make them positive.
+4, 5, 0, -2, -3, 1
+
+iter1:
+i = 0
+j = i = 0
+total = 0 + nums[0] = 0 + 4 = 4
+if 4 % 5 == 0? no -> no increment count
+
+i = 0
+j = 1
+total = 4 + 5 = 9
+if 9 % 5 == 0? no -> no increment count
+...
+
+two loops:
+    - i and j will loop through the nums array
+    - add up (nums[i] + nums[j]) % k == 0 
+
+-------
+hashmaps
+prefix_sum
+
+0  1  2   3   4  5
+4, 5, 0, -2, -3, 1
+4, 9, 9,  7,  4, 5
+
+prefix_sum[4] = 4 % 5 = 4
+prefix_sum[1] = 9 % 5 = 4
+sum(2,4) = -5 % 5 == 0
+
+
+to make the prefix_sum[i] = prefix_sum[i-1] + nums[i]
+
+prefix_sum[j] - prefix_[i-1] -> sum of subarray from i to j
+
+hashmap = { remainder: count }
+
+original goal: (sum of subarray from i to j) % k == 0
+(p[j] - p[i-1]) % k == 0
+(A - B) % K = 0
+(A % K) - (B % K) = 0
+(A % K) = (B % K)
+
+k = 10
+34 % 10 = 4
+84 % 10 = 4
+
+84 - 34 = 50 % 10 == 0
 '''
+
 from typing import List
 
 class Solution:
@@ -40,11 +85,69 @@ class Solution:
     """
 
     def subarraysDivByK_brute_force(self, nums: List[int], k: int) -> int:
-        pass
+        count = 0
+        for i in range(len(nums)):
+            total = 0
+            for j in range(i, len(nums)):
+                total += nums[j]
+                if total % k == 0:
+                    count += 1
+        return count
 
+        '''
+        sum = 5
+        if 5 % 5 == 0 in our hashmap? -> { 0: 1 }
+        count += hashmap[remainder]
+        count = count + 1
+
+        0  1  2   3   4  5
+        4, 5, 0, -2, -3, 1 (original)
+           ^
+        4, 9, 9,  7,  4, 5 (prefix sum)
+
+
+        goal: to find if previous remainder exists using current running sum
+
+        1) Create Map
+        2) Intialize Count
+        3) Prefix Sum = 0
+        4) Loop through array
+        - Add Current value to prefix sum
+        - Check if remainder already in hashmap
+            -> if yes, add freq of remainders to count
+        - Add remainder to the map 
+        
+        for num in nums
+
+        k = 5
+        iter 1: 
+        - num = 4
+        - if 4 % 5 == 4 is this in hashmap? no
+        - {0:1, 4:1}
+
+        iter 2:
+        - num = 5
+        - if 9 % 5 == 4 is this in hashmap? yes
+        - count = 0 + 1 = 1
+        - found a new, valid subarray that ends at the current position
+
+        '''
+    # from collections import defaultdict
     def subarraysDivByK_hashmap(self, nums: List[int], k: int) -> int:
-        pass
+        remainder_freq = {} # remainder: count
+        remainder_freq[0] = 1
 
+        count = 0
+        current_prefix_sum = 0
+
+        for num in nums:
+            current_prefix_sum += num
+            remainder = current_prefix_sum % k
+            if remainder in remainder_freq:
+                count += remainder_freq[remainder]
+            remainder_freq[remainder] = remainder_freq.get(remainder, 0) + 1
+            
+        return count
 
 if __name__ == "__main__":
     solver = Solution()

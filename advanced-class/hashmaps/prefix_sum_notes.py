@@ -63,6 +63,8 @@ prefix_sum = [0, 1, 3, 6, 10, 15, 21, 28]
 space complexity: o(n)
 prefix_sum = [0, 1, 3, 6, 10, 0, 0, 0]
 
+----
+
 def padded_prefix_sum(arr): 
   prefix_sum = [0] * (len(arr) + 1))
   for i in range(1, len(arr)):
@@ -75,7 +77,9 @@ prefix_sum[1] = prefix_sum[1-1] + arr[1-1] = 0 + 1 = 1
 prefix_sum[2] = prefix_sum[2-1] + arr[2-1] = 1 + 2 = 3
 prefix_sum[3] = prefix_sum[3-1] + arr[3-1] = 3 + 3 = 6
 ...
-  
+
+sum(i,j) = prefix_sum[j+1] - prefix_sum[i]
+
 sum(1,3) = prefix_sum[4] - prefix_sum[1] = 10 - 1 = 9
 
 
