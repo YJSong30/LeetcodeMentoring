@@ -100,13 +100,48 @@ while queue:
 
 return x_level == y_level and x_parent != y_parent
 
-'''
-
 
 # (child, parent) -> (node.left, node)
-queue = deque([(root, None)])
-level = 0
-while queue:
-  for i in range(len(queue)):
-    node, parent = queue.popleft()
+
+from collections import deque
+class Solution:
+    def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
+        if not root:
+            return False
+        queue = deque([(root, None)])  
+        while queue:
+            level_size = len(queue)
+            x_parent = y_parent = None
+            for _ in range(level_size):
+                node, parent = queue.popleft()
+                if node.val == x:
+                    x_parent = parent
+                if node.val == y:
+                    y_parent = parent
+                if node.left:
+                    queue.append((node.left, node))
+                if node.right:
+                    queue.append((node.right, node))
+            if x_parent and y_parent:
+                return x_parent != y_parent 
+            if x_parent or y_parent:
+                return False  
+        return False
     
+
+        #this is for 129
+        def dfs(root,cur_path):
+            if not root:
+                return
+            cur_path+=str(root.val)
+            if not root.left or not root.right:
+                res.append(cur_path)
+                return
+            dfs(root.left,cur_path)
+            dfs(root.right,cur_path)
+        total=0
+        for i in res:
+            total+=int(i)
+        return total       
+
+'''
