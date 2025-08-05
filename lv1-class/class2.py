@@ -18,7 +18,15 @@ for i in range(0,len(nums),1): # for i in range(len(nums))
 
 3) nested for loops
         0  1   2   3
-nums = [2, 7, 11, 15]
+nums = [2, 7, 11, 15, 2, 7, 11, 15, 2, 7, 11, 15, 2, 7, 11, 16] # o(n)
+
+my_set = set(nums)
+my_set = {2, 7, 11, 15, 16}
+
+target = 16
+
+if target in my_set: # o(1)
+  return True
 
 (2,2)
 (2,7)
@@ -53,9 +61,9 @@ i = 0: (2,7), (2,11), (2, 15)
 i = 1: (7,11), (7,15)
 i = 2: (11,15)
 
- for i in range(len(nums)): 
-    for j in range(i+1,len(nums)): 
-        print((nums[i],nums[j]))
+for i in range(len(nums)): 
+  for j in range(i+1,len(nums)): 
+      print((nums[i],nums[j]))
 
 
 4) Two Sum
@@ -108,6 +116,7 @@ nums = [1, 2, 3, 4, 5, 6, 7]
 target = 13
 
 t.c = o(n^2)
+o(n log n)
 
 
 217. Contains Duplicate
@@ -153,6 +162,7 @@ return False
 Time complexity Best case: o(1)
 
 Time complexity Average/Worst case:o(n^2)
+
 
 
 
