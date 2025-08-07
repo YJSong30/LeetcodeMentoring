@@ -63,9 +63,9 @@ queue = deque([root])
 
 x_level, y_level = -1,-1
 x_parent, y_parent = None, None
+level = 0
 
 while queue:
-  level = 0
   for i in range(len(queue)):
     node = queue.popleft()
     
@@ -78,11 +78,9 @@ while queue:
     if node.left:
       queue.append(node.left)
       if node.left.val == x:
-        x_level = level
         x_parent = node.val
       
       if node.left.val == y:
-        y_level = level
         y_parent = node.val
 
     if node.right:
