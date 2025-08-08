@@ -25,6 +25,9 @@ def is_palindrome_simple(s: str) -> bool:
     """
     Check if string is palindrome using two pointers from opposite ends.
     Time: O(n), Space: O(1)
+
+    racecar
+    
     """
     left = 0
     right = len(s) - 1

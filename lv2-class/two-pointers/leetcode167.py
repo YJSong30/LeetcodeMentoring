@@ -76,7 +76,7 @@ if __name__ == "__main__":
     for i, case in enumerate(test_cases):
         numbers, target, expected = case["numbers"], case["target"], case["expected"]
         result = solver.twoSum_two_pointers(numbers, target)
-        status = " Pass" if result == expected else "L Fail"
+        status = "✅ Pass" if result == expected else "❌ Fail"
 
         print(f"Test Case {i+1}: {status}")
         print(f"  Input:    numbers = {numbers}, target = {target}")
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     for i, case in enumerate(test_cases):
         numbers, target, expected = case["numbers"], case["target"], case["expected"]
         result = solver.twoSum_hashmap(numbers, target)
-        status = " Pass" if result == expected else "L Fail"
+        status = "✅ Pass" if result == expected else "❌ Fail"
 
         print(f"Test Case {i+1}: {status}")
         print(f"  Input:    numbers = {numbers}, target = {target}")
