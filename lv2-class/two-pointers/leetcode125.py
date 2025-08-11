@@ -31,6 +31,18 @@ Constraints:
 Task:
 - Implement a two-pointer solution.
 - Analyze the time and space complexity of both.
+
+1) clean the input string into just letters and numbers
+2) convert all uppercase letters to lowercase
+3) initialize two pointers: left and right
+4) while loop l <= r
+5) check if string[l] != string[r]
+5.5) return false
+
+6) if it is then, continue -> increment l by 1 and decrement r by 1
+7) break out of loop
+8) return true
+
 '''
 
 class Solution:
@@ -41,8 +53,35 @@ class Solution:
     def isPalindrome_two_pointers(self, s: str) -> bool:
         """
         Two-pointer approach solution.
+        letter.isalnum() A-Z, a-z, 0-9 -> return True
+        letter.lower()
+
+        A man, a plan, a canal
+        ["a", "m", "a", "n", "a"... "l"]
         """
-        pass
+        cleanedArray = []
+        for char in s:
+            if char.isalnum():
+                cleanedArray.append(char.lower()) # "race" + "c" = "racec". this is o(n^2)
+            else: 
+                continue
+
+        cleanedStr = "".join(cleanedArray)
+
+        left = 0
+        right = len(cleanedStr) - 1
+
+        while left <= right:
+            if cleanedStr[left] != cleanedStr[right]:
+                return False
+            else:
+                left += 1
+                right -= 1
+
+        return True
+
+        # res = ["a", "c", "b"]
+        # "".join(res) -> "acb"
 
 if __name__ == "__main__":
     solver = Solution()
@@ -63,19 +102,7 @@ if __name__ == "__main__":
     for i, case in enumerate(test_cases):
         s, expected = case["s"], case["expected"]
         result = solver.isPalindrome_two_pointers(s)
-        status = " Pass" if result == expected else "L Fail"
-
-        print(f"Test Case {i+1}: {status}")
-        print(f'  Input:    s = "{s}"')
-        print(f"  Output:   {result}")
-        print(f"  Expected: {expected}\n")
-
-    print("--- Testing String Manipulation Solution ---")
-    print()
-    for i, case in enumerate(test_cases):
-        s, expected = case["s"], case["expected"]
-        result = solver.isPalindrome_string_manipulation(s)
-        status = " Pass" if result == expected else "L Fail"
+        status = "✅ Pass" if result == expected else "❌ Fail"
 
         print(f"Test Case {i+1}: {status}")
         print(f'  Input:    s = "{s}"')

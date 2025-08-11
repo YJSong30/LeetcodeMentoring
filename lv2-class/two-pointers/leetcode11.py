@@ -46,14 +46,44 @@ class Solution:
     def maxArea_brute_force(self, height: list[int]) -> int:
         """
         Brute force solution using nested loops.
+                  i  j
+        height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
+
         """
-        pass
+        highestArea = 0
+
+        for i in range(len(height)):
+            for j in range(i+1, len(height)):
+                area = min(height[i], height[j]) * (j - i)
+                # if height[i] < height[j]:
+                #     area = height[i] * (j - i)
+                # else:
+                #     area = height[j] * (j - i)
+                
+                highestArea = max(area, highestArea)
+                # if area > highestArea:
+                #     highestArea = area
+
+        return highestArea
     
     def maxArea_two_pointers(self, height: list[int]) -> int:
         """
         Optimized two-pointer solution.
         """
-        pass
+        left = 0
+        right = len(height) - 1
+        highestArea = 0
+
+        while left < right:
+            area = (right - left) * min(height[left], height[right])
+            highestArea = max(area, highestArea)
+
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+
+        return highestArea
 
 if __name__ == "__main__":
     solver = Solution()
@@ -74,7 +104,7 @@ if __name__ == "__main__":
     for i, case in enumerate(test_cases):
         height, expected = case["height"], case["expected"]
         result = solver.maxArea_brute_force(height)
-        status = " Pass" if result == expected else "L Fail"
+        status = "✅Pass" if result == expected else "❌ Fail"
 
         print(f"Test Case {i+1}: {status}")
         print(f"  Input:    height = {height}")
@@ -86,7 +116,7 @@ if __name__ == "__main__":
     for i, case in enumerate(test_cases):
         height, expected = case["height"], case["expected"]
         result = solver.maxArea_two_pointers(height)
-        status = " Pass" if result == expected else "L Fail"
+        status = "✅ Pass" if result == expected else "❌ Fail"
 
         print(f"Test Case {i+1}: {status}")
         print(f"  Input:    height = {height}")
