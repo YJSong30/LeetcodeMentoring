@@ -14,6 +14,25 @@ KEY CONCEPTS:
 
 COMMON PATTERNS:
 ---------------
+
+nums = [1,2,3,4,5]
+
+target = 9
+task: find a pair of indicies that equals target
+
+left = 0
+right = len(nums) - 1
+
+while l < r:
+    if nums[l] + nums[r] == target:
+        return [l, r]
+    elif nums[l] + nums[r] < target:
+        l += 1
+    else:
+        r -= 1
+
+return -1
+
 """
 
 # PATTERN 1: OPPOSITE DIRECTION (Meeting in the Middle)
@@ -25,14 +44,13 @@ def is_palindrome_simple(s: str) -> bool:
     """
     Check if string is palindrome using two pointers from opposite ends.
     Time: O(n), Space: O(1)
+    r a c e c a r
 
-    racecar
-    
     """
     left = 0
     right = len(s) - 1
     
-    while left < right:
+    while left <= right:
         if s[left] != s[right]:
             return False
         left += 1
