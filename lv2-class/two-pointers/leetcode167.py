@@ -55,7 +55,21 @@ class Solution:
         """
         Two-pointer approach solution.
         """
-        pass
+        left = 0
+        right = len(numbers) - 1
+
+        while left < right:
+            currentSum = numbers[left] + numbers[right]
+            if currentSum == target:
+                return [left+1, right+1]
+            elif currentSum < target:
+                left += 1
+            else:
+                right -= 1
+
+        return []
+            
+            
 
 if __name__ == "__main__":
     solver = Solution()
@@ -76,18 +90,6 @@ if __name__ == "__main__":
     for i, case in enumerate(test_cases):
         numbers, target, expected = case["numbers"], case["target"], case["expected"]
         result = solver.twoSum_two_pointers(numbers, target)
-        status = "✅ Pass" if result == expected else "❌ Fail"
-
-        print(f"Test Case {i+1}: {status}")
-        print(f"  Input:    numbers = {numbers}, target = {target}")
-        print(f"  Output:   {result}")
-        print(f"  Expected: {expected}\n")
-
-    print("--- Testing Hashmap Solution ---")
-    print()
-    for i, case in enumerate(test_cases):
-        numbers, target, expected = case["numbers"], case["target"], case["expected"]
-        result = solver.twoSum_hashmap(numbers, target)
         status = "✅ Pass" if result == expected else "❌ Fail"
 
         print(f"Test Case {i+1}: {status}")
