@@ -36,9 +36,6 @@ Task:
 - Implement an optimized hashmap-based solution.
 - Analyze the time and space complexity of both.
 
-Hint:
-- Think about using a hashmap to store complements. For each number,
-check if its complement (target - num) exists in the hashmap.
 '''
 from typing import List
 
