@@ -27,11 +27,6 @@ Constraints:
 Follow up: Could you come up with a one-pass algorithm using only constant
 extra space?
 
-Task:
-- Implement a brute-force solution.
-- Implement an optimized two-pointer (Dutch National Flag) solution.
-- Analyze the time and space complexity of both.
-
 '''
 from typing import List
 
