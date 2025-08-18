@@ -53,6 +53,23 @@ class Solution:
         nums.sort() # t.c = o(n log n)
         res = []
 
+        """
+        Test Case
+        [3, -1, -4, 2, -2, 1, 0, -1]
+
+        Sort: [-4, -2, -1, -1, 0, 1, 2, 3] 
+
+        2nd for loop
+        -4, -2, -1, -1, 0, 1, 2, 3
+            i           L     R 
+
+        Sum = -2 -1 +3 = 0
+
+        res = [[-4, 1, 3], [-2, -1, 3]]
+        
+        """
+
+
         for i in range(len(nums)):
             if nums[i] > 0:
                 break
@@ -64,6 +81,7 @@ class Solution:
                 current_sum = nums[i] + nums[left] + nums[right]
 
                 if current_sum == 0:
+                
                     res.append([nums[i], nums[left], nums[right]])
 
                     while left < right and nums[left] == nums[left+1]:
