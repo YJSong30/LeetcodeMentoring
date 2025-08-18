@@ -27,7 +27,6 @@ Constraints:
 Task:
 - Implement a brute-force solution.
 - Implement an optimized hashset-based solution.
-- Implement a sorting-based solution.
 - Analyze the time and space complexity of each.
 
 '''
