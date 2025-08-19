@@ -111,7 +111,7 @@ Examples:
 Algorithm Example:
 def find_max(nums):
     # Only using a single variable, regardless of input size
-    max_val = float('-inf')  # O(1) space
+    max_val = float('-inf') # o(1)
     for num in nums:
         if num > max_val:
             max_val = num
@@ -128,8 +128,8 @@ Examples:
 Algorithm Example:
 def remove_duplicates(nums):
     # Creating a set that could hold all n elements
-    unique = set(nums)  # O(n) space
-    return list(unique)  # O(n) space for the new list
+    unique = set(nums) # o(n)
+    return list(unique)
 
 O(n²) - Quadratic Space
 -----------------------
@@ -156,24 +156,24 @@ ANALYZING LEETCODE PATTERNS
 def example_constant_time():
     """O(1) Time, O(1) Space"""
     arr = [1, 2, 3, 4, 5]
-    first = arr[0]  # O(1) - direct access
-    last = arr[-1]  # O(1) - direct access
-    return first + last  # O(1) - simple operation
+    first = arr[0]
+    last = arr[-1]
+    return first + last 
 
 
 def example_linear_time(nums):
     """O(n) Time, O(1) Space"""
     max_val = float('-inf')
-    for num in nums:  # O(n) - one pass
-        max_val = max(max_val, num)  # O(1) operation
+    for num in nums:
+        max_val = max(max_val, num)
     return max_val
 
 
 def example_quadratic_time(nums):
     """O(n²) Time, O(1) Space - Finding duplicates brute force"""
     n = len(nums)
-    for i in range(n):  # O(n)
-        for j in range(i + 1, n):  # O(n)
+    for i in range(n):
+        for j in range(i + 1, n):
             if nums[i] == nums[j]:
                 return True
     return False
@@ -181,23 +181,29 @@ def example_quadratic_time(nums):
 
 def example_linear_space(nums):
     """O(n) Time, O(n) Space - Using hash set"""
-    seen = set()  # O(n) space in worst case
-    for num in nums:  # O(n) time
-        if num in seen:  # O(1) average time
+    seen = set() 
+    for num in nums:
+        if num in seen:
             return True
-        seen.add(num)  # O(1) average time
+        seen.add(num)
     return False
 
 
 def example_sorting_solution(nums):
     """O(n log n) Time, O(1) or O(n) Space depending on sort implementation"""
-    nums.sort()  # O(n log n) time
-    for i in range(1, len(nums)):  # O(n) time
+    nums.sort() # n log n 
+    for i in range(1, len(nums)): # n
         if nums[i] == nums[i-1]:
             return True
     return False
-    # Total: O(n log n) + O(n) = O(n log n)
 
+    # name = "Akhilan"
+    # name.sort()
+
+    # ["A", "a", "h", "i", "k", "l", "n"]
+
+    # "calvinchris"
+    # "".join(sorted(name)) "Aahikln"
 
 '''
 ================================

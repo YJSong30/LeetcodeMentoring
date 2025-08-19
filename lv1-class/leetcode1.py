@@ -94,15 +94,44 @@ class Solution:
         # seen = {2:0, 7:1 }
         # t.c: O(n)
         # s.p: O(n)
-        seen = {}
-        for index, num in enumerate(nums):
-            difference = target - num
-            if difference in seen:
-                return [seen[difference],index]
-            seen[num]=index
-        return []
 
+        # What is a hashmap?
+        # Data structure that holds a key value pair
 
+        # hashmap - store the values of target - num[i] 
+        # index is the key of the hash map
+        hashmap = {}
+        # loop through numbers 
+        for i in range(len(nums)):
+            # get the diff 
+            diff = target - nums[i]
+            # store the diff in hashMap
+            hashmap[diff] = i
+            # check if next value is in the hashMap
+            if nums[i+1] in hashmap:
+                # return key of hash & index + 1 
+                return [hashmap[nums[i+1]], i+1]
+        
+        # Input: nums = [2,7,11,15], target = 9
+        # Input: nums = [0, 4, 3, 0], target = 0
+        
+    '''
+    hashmap = {0: 0, -4: 1, -3: 2, }
+    0 4 3 0, target = 0
+        ^
+    diff = 0 - 0 = 0
+    hashmap[0] = 0
+    if 4 in hashmap:
+        [return hashmap[0], 1]
+    diff = 0 - 4 = -4
+    hashmap[-4] = 1
+
+    diff = 0 - 3 = -3
+    hashmap[-3] = 2
+    return [hashmap[-3], 2+1] = [2,3]
+
+        
+    '''
 
 if __name__ == "__main__":
     solver = Solution()
