@@ -39,11 +39,21 @@ class Solution:
 
     def containsDuplicate_brute_force(self, nums: List[int]) -> bool:
         # TODO: Implement brute-force solution
-        pass
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                if nums[i] == nums[j]:
+                    return True
+        return False
 
     def containsDuplicate_hashset(self, nums: List[int]) -> bool:
         # TODO: Implement hashset solution
-        pass
+        my_set = set()
+        for num in nums:
+            # check if that number is in our set
+            if num in my_set:
+                return True
+            my_set.add(num)
+        return False
 
 
 if __name__ == "__main__":

@@ -67,6 +67,9 @@ class Solution:
         # O(n) + O(n) = O(2n) -> O(n) 👍🏿
         return hashm1 == hashm2
 
+    '''
+    349. Intersection of Two Arrays
+    '''
 
 if __name__ == "__main__":
     solver = Solution()
