@@ -2,13 +2,14 @@
 LeetCode 268: Missing Number
 
 Problem Statement:
-Given an array nums containing n distinct numbers in the range [0, n], 
-return the only number in the range that is missing from the array.
+Given an array nums containing n distinct numbers in the range [0, n+1], 
+return the only number in the range that is missing from the array. We are
+guarenteed one missing number.
 
 Example 1:
 Input: nums = [3,0,1]
 Output: 2
-Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0,3]. 
+Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0,3].  
 2 is the missing number in the range since it does not appear in nums.
 
 Example 2:
@@ -31,8 +32,6 @@ Constraints:
 
 Task:
 - Implement a brute-force solution using a hash set.
-- Implement a math-based solution using sum formula.
-- Implement a bit manipulation solution using XOR (bonus).
 - Analyze the time and space complexity of each.
 
 '''
@@ -45,7 +44,25 @@ class Solution:
 
     def missingNumber_hashset(self, nums: List[int]) -> int:
         # TODO: Implement hashset solution
-        pass
+        # the range should be len(nums) + 1
+        # 1) convert the nums array to a set
+        # 2) for loop -> check if i in set, if not return i
+        nums_set = set(nums)
+        for i in range(len(nums) + 1):
+            if i not in nums_set:
+                return i
+
+'''
+nums = [3,0,1] -> 0, 1, 3
+nums_set = {3, 0, 1}
+for i in range(len(nums) + 1): # 0, 1, 2, 3
+    if i not in nums_set:
+        return i
+
+return False
+
+'''
+        
 
 
 if __name__ == "__main__":
@@ -71,32 +88,6 @@ if __name__ == "__main__":
         # Show abbreviated version for large arrays
         display_nums = nums if len(nums) <= 10 else f"[{nums[0]}, {nums[1]}, ..., {nums[-2]}, {nums[-1]}]"
         result = solver.missingNumber_hashset(nums)
-        status = "✅ Pass" if result == expected else "❌ Fail"
-
-        print(f"Test Case {i+1}: {status}")
-        print(f'  Input:    nums = {display_nums}')
-        print(f"  Output:   {result}")
-        print(f"  Expected: {expected}\n")
-
-    print("--- Testing Math Solution ---")
-    print()
-    for i, case in enumerate(test_cases):
-        nums, expected = case["nums"], case["expected"]
-        display_nums = nums if len(nums) <= 10 else f"[{nums[0]}, {nums[1]}, ..., {nums[-2]}, {nums[-1]}]"
-        result = solver.missingNumber_math(nums)
-        status = "✅ Pass" if result == expected else "❌ Fail"
-
-        print(f"Test Case {i+1}: {status}")
-        print(f'  Input:    nums = {display_nums}')
-        print(f"  Output:   {result}")
-        print(f"  Expected: {expected}\n")
-
-    print("--- Testing XOR Solution (Bonus) ---")
-    print()
-    for i, case in enumerate(test_cases):
-        nums, expected = case["nums"], case["expected"]
-        display_nums = nums if len(nums) <= 10 else f"[{nums[0]}, {nums[1]}, ..., {nums[-2]}, {nums[-1]}]"
-        result = solver.missingNumber_xor(nums)
         status = "✅ Pass" if result == expected else "❌ Fail"
 
         print(f"Test Case {i+1}: {status}")
