@@ -23,13 +23,52 @@ Input: s = "(]"
 Output: false
 
 Example 4:
-Input: s = "([)]"
+Input: s = "([)]" 
 Output: false
 
 Example 5:
-Input: s = "{[]}"
+Input: s = " { [ ] } "
+                 ^
+                 p
 Output: true
+ 
+|   [    | <--
+|   {    |
 
+Iter 0: 
+
+LIFO - last in first out
+
+step 1)
+    stack=[]
+    hashmap = {
+        "}" : "{"        
+        "]" : "["
+    }
+
+    hashmap.keys()
+    hashmap.values()
+    
+    set = {"apples", "bananas", "cherries"}
+    how to check if "cherries" in this set?
+
+    if "cherries" in set: 
+    set["cherries"]    
+
+    for char in s:
+        if char in hashmap.values():
+            stack.append(s)
+        elif check if it's a closing
+            if stack[-1] == hashmap[char]:
+                if stack != empty:
+                    stack.pop()
+
+    if stack != empty 
+        return False
+    else:
+        return True
+         
+            
 Constraints:
 - 1 <= s.length <= 10^4
 - s consists of parentheses only '()[]{}'.
@@ -45,16 +84,35 @@ class Solution:
     Contains solutions for the Valid Parentheses problem.
     """
 
-    def isValid_brute_force(self, s: str) -> bool:
-        """
-        Brute force approach: repeatedly remove valid pairs until string is empty or no more pairs can be removed.
-        """
-
     def isValid_stack(self, s: str) -> bool:
-        """
-        Stack-based approach: use stack to track opening brackets.
-        """
+        stack = []
+        hashmap = {
+            "}": "{",
+            ")": "(",
+            "]": "[",
+        }
+        
+        for char in s:
+            # opening char
+            if char in hashmap.values():
+                stack.append(char)
+            # closing char
+            elif char in hashmap.keys():
+                if stack and stack[-1] == hashmap[char]:
+                    stack.pop()
+                else:
+                    return False
+            #invalid char
+            else:
+                return False
 
+        return len(stack) == 0
+            
+            # if stack.isEmpty():
+            #     return True
+            # else:
+            #     return False
+                    
 if __name__ == "__main__":
     solver = Solution()
 
@@ -69,18 +127,18 @@ if __name__ == "__main__":
         {"s": "({[]})", "expected": True}
     ]
 
-    print()
-    print("--- Testing Brute-Force Solution ---")
-    print()
-    for i, case in enumerate(test_cases):
-        s, expected = case["s"], case["expected"]
-        result = solver.isValid_brute_force(s)
-        status = "✅ Pass" if result == expected else "❌ Fail"
+    # print()
+    # print("--- Testing Brute-Force Solution ---")
+    # print()
+    # for i, case in enumerate(test_cases):
+    #     s, expected = case["s"], case["expected"]
+    #     result = solver.isValid_brute_force(s)
+    #     status = "✅ Pass" if result == expected else "❌ Fail"
 
-        print(f"Test Case {i+1}: {status}")
-        print(f'  Input:    s = "{s}"')
-        print(f"  Output:   {result}")
-        print(f"  Expected: {expected}\n")
+    #     print(f"Test Case {i+1}: {status}")
+    #     print(f'  Input:    s = "{s}"')
+    #     print(f"  Output:   {result}")
+    #     print(f"  Expected: {expected}\n")
 
     print("--- Testing Stack Solution ---")
     print()
