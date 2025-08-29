@@ -54,7 +54,7 @@ class Solution:
                 return True
             my_set.add(num)
         return False
-
+# nums = [1,2,3,1] -> {1, 2, 3} -> {1, 2}
 
 if __name__ == "__main__":
     solver = Solution()
