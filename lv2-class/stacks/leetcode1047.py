@@ -26,10 +26,6 @@ Constraints:
 - 1 <= s.length <= 10^5
 - s consists of lowercase English letters.
 
-Task:
-- Implement a brute-force solution.
-- Implement an optimized stack-based solution.
-- Analyze the time and space complexity of both.
 '''
 
 class Solution:
