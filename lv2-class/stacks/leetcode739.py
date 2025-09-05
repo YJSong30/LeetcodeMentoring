@@ -18,10 +18,100 @@ Task:
 - Analyze the time and space complexity of both.
 '''
 
+'''
+[73, 74, 75, 71, 69, 72, 76, 73]
+ ^    ^
+
+current = 0
+hotIter = 1
+hotter = []
+
+ iter 1:
+    current -> 73 [0]
+    hotIter -> 74 [1]
+    74 > 73 -> difference = hotIter - current = 1
+    
+    add the difference to array:
+    hotter = [1]
+
+iter 2:
+    current -> 74 [1]
+    hotIter -> 75 [2]
+    75 > 74 -> difference = hotIter - current = 1
+    
+    add the difference to array:
+    hotter = [1, 1]
+
+iter 3:
+    current -> 75 [2]
+    hotIter -> 71 [3]
+    75 < 71 -> hotIter go to next index
+
+    current -> 75 [2]
+    hotIter -> 69 [4]
+    75 < 69 -> hotIter go to next index
+
+    current -> 75 [2]
+    hotIter -> 72 [5]
+    75 < 72 -> hotIter go to next index
+
+    current -> 75 [2]
+    hotIter -> 76 [6]
+    75 > 76 -> difference = hotIter - current = 4
+    
+    add the difference to array:
+    hotter = [1, 1, 4]
+
+iter 4:
+    current -> 71 [3]
+    hotIter -> 69 [4]
+    71 < 71 -> hotIter go to next index
+
+[30,40,50,60]
+
+iter 1:
+    i = 30
+    j = 40
+
+iter 2:
+    i = 40
+    j = 50
+
+iter 3: 
+    i = 50
+    j = 60 [4, last index]
+
+iter 4: 
+    i = 60
+
+    return [1, 1, 1, 0]
+
+Wrong: [1,1,0,0]
+'''
 class Solution:
 
     def dailyTemperatures_brute_force(self, temperatures: list[int]) -> list[int]:
-        pass
+        hotter = []
+
+        for i in range(len(temperatures)):
+
+            if i == len(temperatures) - 1:
+                hotter.append(0)
+
+            for j in range(i+1, len(temperatures)):
+
+                if temperatures[i] < temperatures[j]:
+                    hotter.append(j-i)
+                    break
+                
+                # if j is last element
+                if j == len(temperatures) - 1:
+                    hotter.append(0)
+                    
+            # else:
+            #     hotter.append(0)
+
+        return hotter        
 
     def dailyTemperatures_stack(self, temperatures: list[int]) -> list[int]:
         pass

@@ -29,9 +29,16 @@ Constraints:
 '''
 
 class Solution:
+    def removeDuplicates(self, s: str) -> str:
+        stack = []
 
-    def removeDuplicates_stack(self, s: str) -> str:
-        pass
+        for char in s: # o(n)
+            if stack and char == stack[-1]: # o(1)
+                stack.pop() # o(1)
+            else:
+                stack.append(char) # o(1)
+        
+        return "".join(stack)
 
 
 if __name__ == "__main__":
@@ -47,18 +54,6 @@ if __name__ == "__main__":
         {"s": "mississippi", "expected": "mppi"}
     ]
 
-    print()
-    print("--- Testing Brute-Force Solution ---")
-    print()
-    for i, case in enumerate(test_cases):
-        s, expected = case["s"], case["expected"]
-        result = solver.removeDuplicates_brute_force(s)
-        status = "✅ Pass" if result == expected else "❌ Fail"
-
-        print(f"Test Case {i+1}: {status}")
-        print(f'  Input:    s = "{s}"')
-        print(f"  Output:   "{result}"")
-        print(f"  Expected: "{expected}"\n")
 
     print("--- Testing Stack Solution ---")
     print()
