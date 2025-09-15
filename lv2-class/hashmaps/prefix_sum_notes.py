@@ -38,6 +38,9 @@ def create_prefix_sum(arr):
   for i in range(1, len(arr)):
     arr[i] += arr[i-1]
   return arr
+
+nums = [1,3,6,10,15,21,28]
+
         i     j
         0 1 2 3 4 5 6
 nums = [1,3,6,10,15,21,28]

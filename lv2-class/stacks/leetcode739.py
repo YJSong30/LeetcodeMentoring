@@ -114,7 +114,35 @@ class Solution:
         return hotter        
 
     def dailyTemperatures_stack(self, temperatures: list[int]) -> list[int]:
-        pass
+        
+        days = [0] * len(temperatures)
+        stack = []
+        for i in range(len(temperatures)): # o(n)
+            
+            while stack and temperatures[i] > temperatures[stack[-1]]: 
+                days[stack[-1]] = i - stack[-1]
+                stack.pop()
+            
+            stack.append(i)
+
+        return days
+
+        """
+        0 -> 73
+        1 -> 74
+        2 -> 75
+        3 -> 71
+        4 -> 69
+        5 -> 72
+        6 -> 76
+        7 -> 73
+
+        [6, 7]
+
+        days = [1, 1, 4, 2, 1, 1, 0, 0]
+
+        i = 1
+        """
 
 
 if __name__ == "__main__":
