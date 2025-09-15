@@ -45,10 +45,39 @@ Task:
 class Solution:
     
     def nextGreaterElement_brute_force(self, nums1: list[int], nums2: list[int]) -> list[int]:
-        pass
+        result = []
+        
+        for num in nums1:
+            idx = nums2.index(num)
+            next_greater = -1
+            for j in range(idx + 1, len(nums2)):
+                if nums2[j] > num:
+                    next_greater = nums2[j]
+                    break
+            
+            result.append(next_greater)
+        
+        return result
     
     def nextGreaterElement_stack(self, nums1: list[int], nums2: list[int]) -> list[int]:
-        pass
+        next_greater_map = {}
+        stack = []
+        
+        for num in nums2:
+            while stack and num > stack[-1]:
+                smaller = stack.pop()
+                next_greater_map[smaller] = num
+            
+            stack.append(num)
+        
+        while stack:
+            next_greater_map[stack.pop()] = -1
+        
+        result = []
+        for num in nums1:
+            result.append(next_greater_map[num])
+        
+        return result
 
 
 if __name__ == "__main__":
