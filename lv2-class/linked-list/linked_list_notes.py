@@ -22,7 +22,6 @@ class ListNode:
     self.data = data
     self.next = next
 
-
 class LinkedList:
   def __init__(self, head=None):
     self.head = head
@@ -48,12 +47,35 @@ class LinkedList:
         print(ptr.data)
       ptr = ptr.next
   
-  def add_node(self, data):
-    pass
+  def add_node(self, val): # 1 -> 2 -> 3 -> 4 -> 5
+    ptr = self.head
+    while ptr.next:
+      ptr = ptr.next
+    node = ListNode(val)
+    ptr.next = node
+
+  def reverse_linked_list(self):
+    prev = None
+    curr = self.head
+
+    while curr:
+      temp = curr.next
+      curr.next = prev
+      prev = curr
+      curr = temp
+
+    self.head = prev
 
 l1 = LinkedList()
 l1.build_linked_list(items)
 l1.print_linked_list()
+l1.add_node(5)
+l1.add_node(7)
+l1.add_node(11)
+l1.print_linked_list()
+l1.reverse_linked_list()
+l1.print_linked_list()
+
 
 '''
 previousNode = None
