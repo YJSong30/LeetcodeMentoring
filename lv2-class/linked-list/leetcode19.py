@@ -48,11 +48,46 @@ class Solution:
 
     def removeNthFromEnd_twopass(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         # TODO: Implement two-pass solution
-        pass
+        count = 0
+        ptr = head
+        while ptr:
+            count += 1
+            ptr = ptr.next
+
+        if count == n: 
+            return head.next
+
+        ptr = head
+        for i in range(count - n - 1):
+            ptr = ptr.next
+
+        ptr.next = ptr.next.next
+
+        return head
+
 
     def removeNthFromEnd_onepass(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         # TODO: Implement one-pass solution with two pointers
-        pass
+        ptr1 = head
+        ptr2 = head
+        
+        # Move ptr2 ahead so it can find the end
+        for i in range(n):
+            ptr2 = ptr2.next
+
+        # ptr2 outside linked list, if n = size of list (remove first node)
+        if not ptr2:
+            return head.next
+
+        # ptr2 is still in linked list (means n < size of list)
+        while ptr2.next:
+            ptr2 = ptr2.next
+            ptr1 = ptr1.next
+
+        # removes the node after after ptr1
+        ptr1.next = ptr1.next.next
+
+        return head
 
 def create_linked_list(values):
     """Helper function to create a linked list from a list of values."""
